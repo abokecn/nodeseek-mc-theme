@@ -1,0 +1,472 @@
+/* =========================================================
+   NodeSeek Minecraft Theme V3.0 (Clean)
+   - Day: no wallpaper
+   - Night: fixed wallpaper (current)
+   - Frosted glass UI
+   - Inventory-slot navigation (mobile friendly)
+   - Pixel fonts: GNU Unifont (CJK) + Mojangles (if available)
+   ========================================================= */
+
+/* -------------------------
+   0) Fonts (Pixel)
+   ------------------------- */
+
+/* Mojangles: if CDN blocked, it simply falls back */
+@font-face{
+  font-family:"Mojangles";
+  src:url("https://cdn.jsdelivr.net/gh/IdreesInc/Minecraft-Font@master/font/Minecraftia-Regular.woff2") format("woff2");
+  font-display:swap;
+}
+
+/* GNU Unifont: strong pixel CJK */
+@font-face{
+  font-family:"GNUUnifont";
+  src:url("https://unpkg.com/unifont@latest/font-builds/unifont-15.0.01.woff2") format("woff2");
+  font-display:swap;
+}
+
+/* -------------------------
+   1) Variables
+   ------------------------- */
+:root{
+  /* Palette */
+  --mc-bg: #0b0f12;
+  --mc-text: #eef6f2;
+  --mc-muted: #b4c8bf;
+
+  --mc-grass: #3aa655;
+  --mc-grass2:#2e8744;
+  --mc-dirt:  #8b5a2b;
+  --mc-oak:   #b98752;
+  --mc-diamond:#4de7ff;
+
+  /* Glass system */
+  --glass-lite: rgba(255,255,255,.12); /* day */
+  --glass-dark: rgba(0,0,0,.38);       /* night */
+  --glass-bd:   rgba(255,255,255,.16);
+  --glass-bd2:  rgba(255,255,255,.22);
+  --glass-blur: 10px;
+
+  /* Shadow / depth (MC UI-ish) */
+  --depth: 0 10px 0 rgba(0,0,0,.35);
+  --depth-sm: 0 8px 0 rgba(0,0,0,.30);
+
+  /* Inventory slots */
+  --slot: 56px;        /* desktop slot size */
+  --slot-gap: 10px;
+  --slot-radius: 10px;
+  --slot-bd: rgba(0,0,0,.35);
+  --slot-hi: rgba(255,255,255,.12);
+  --slot-bg1: rgba(18,26,22,.78);
+  --slot-bg2: rgba(10,16,14,.78);
+
+  /* Typography */
+  --px-size: 15px;
+  --px-line: 1.6;
+}
+
+/* -------------------------
+   2) Global reset / base
+   ------------------------- */
+html, body{
+  height:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow-x:hidden !important;
+}
+
+a.promotation-item{ display:none !important; }
+
+/* Pixel font everywhere (clean + consistent) */
+html, body, #nsk-frame, #nsk-frame *{
+  font-family: "GNUUnifont","Mojangles",monospace !important;
+  font-size: var(--px-size) !important;
+  line-height: var(--px-line) !important;
+  letter-spacing: .2px !important;
+  text-transform: none !important;
+
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  text-rendering: optimizeSpeed;
+}
+
+/* Links */
+a{
+  color: var(--mc-grass) !important;
+  text-decoration:none !important;
+  transition: all .18s ease;
+}
+a:hover{
+  color: var(--mc-diamond) !important;
+  text-shadow: 0 0 10px rgba(77,231,255,.20) !important;
+}
+
+/* -------------------------
+   3) Wallpaper policy
+   - Day: none
+   - Night: fixed wallpaper
+   ------------------------- */
+body, #nsk-frame{
+  background-color: var(--mc-bg) !important;
+  background-image: none !important;
+}
+
+@media (prefers-color-scheme: dark){
+  body, #nsk-frame{
+    background-image: url("https://img.jingsublog.com/i/2026/02/12/5ibmuf.png") !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-attachment: fixed !important;
+  }
+}
+
+/* Mobile: avoid fixed attachment jank */
+@media (max-width: 768px){
+  @media (prefers-color-scheme: dark){
+    body, #nsk-frame{
+      background-attachment: scroll !important;
+      background-position: center top !important;
+    }
+  }
+}
+
+/* -------------------------
+   4) Frosted glass surfaces
+   ------------------------- */
+header, #nsk-head,
+#nsk-left-panel-container .nsk-panel,
+#nsk-right-panel-container .nsk-panel,
+.post-list-controler, .nsk-pager, .post-list-item,
+.head-container, .selector,
+#nsk-body, .board,
+.msc-content{
+  background: var(--glass-lite) !important;
+  border: 2px solid var(--glass-bd) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--depth) !important;
+
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+@media (prefers-color-scheme: dark){
+  header, #nsk-head,
+  #nsk-left-panel-container .nsk-panel,
+  #nsk-right-panel-container .nsk-panel,
+  .post-list-controler, .nsk-pager, .post-list-item,
+  .head-container, .selector,
+  #nsk-body, .board,
+  .msc-content{
+    background: var(--glass-dark) !important;
+    border-color: var(--glass-bd2) !important;
+  }
+}
+
+/* Header grass strip (MC vibe, not too loud) */
+header, #nsk-head{
+  position: relative;
+  border-bottom-color: rgba(58,166,85,.55) !important;
+}
+header::after, #nsk-head::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:-2px;
+  height:10px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,0) 60%),
+    repeating-linear-gradient(90deg, var(--mc-grass) 0 12px, var(--mc-grass2) 12px 24px);
+  border-bottom:2px solid rgba(0,0,0,.25);
+  pointer-events:none;
+  opacity:.75;
+}
+
+/* Search box */
+.search-box input[type="text"]{
+  background: rgba(10,16,14,.72) !important;
+  border: 2px solid var(--glass-bd2) !important;
+  color: var(--mc-text) !important;
+  border-radius: 8px !important;
+  box-shadow: inset 0 0 0 2px rgba(0,0,0,.25);
+}
+.search-box input[type="text"]:focus{
+  outline:none !important;
+  border-color: rgba(77,231,255,.55) !important;
+  box-shadow: 0 0 0 4px rgba(77,231,255,.12), inset 0 0 0 2px rgba(0,0,0,.25);
+}
+
+/* -------------------------
+   5) Post list cards (pixel corners)
+   ------------------------- */
+.post-list-item{
+  position: relative;
+  transition: all .18s ease;
+}
+.post-list-item:hover{
+  border-color: rgba(77,231,255,.40) !important;
+  box-shadow: var(--depth), 0 0 16px rgba(77,231,255,.10) !important;
+  transform: translateY(-2px);
+}
+
+/* Pixel corners: grass & dirt */
+.post-list-item::before,
+.post-list-item::after{
+  content:"";
+  position:absolute;
+  width:14px; height:14px;
+  border:3px solid transparent;
+  pointer-events:none;
+}
+.post-list-item::before{
+  top:-3px; left:-3px;
+  border-top-color: var(--mc-grass);
+  border-left-color: var(--mc-grass);
+}
+.post-list-item::after{
+  bottom:-3px; right:-3px;
+  border-bottom-color: var(--mc-dirt);
+  border-right-color: var(--mc-dirt);
+}
+
+/* Title / meta colors */
+.post-title a{ color: var(--mc-text) !important; }
+.post-info, .post-info span, .post-info time{ color: var(--mc-muted) !important; }
+.post-info .info-author a, .post-info .info-last-commenter a{ color: var(--mc-grass) !important; }
+
+/* Category = wooden sign */
+.post-category{
+  background: linear-gradient(180deg, var(--mc-oak), var(--mc-dirt)) !important;
+  color: #1b1207 !important;
+  border: 2px solid rgba(0,0,0,.25) !important;
+  padding: 2px 7px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 6px 0 rgba(0,0,0,.28) !important;
+}
+
+/* Sticky carousel */
+.topic-carousel-wrapper{
+  border-color: rgba(58,166,85,.55) !important;
+}
+
+/* -------------------------
+   6) Buttons & pager (MC-like)
+   ------------------------- */
+.btn, .button-3, .ant-btn-primary{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0) 45%),
+    linear-gradient(180deg, var(--mc-grass), var(--mc-grass2)) !important;
+  border: 2px solid var(--glass-bd2) !important;
+  color: #07100d !important;
+  font-weight: 900 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 0 rgba(0,0,0,.35), inset 0 0 0 2px rgba(0,0,0,.18) !important;
+  transition: all .18s ease !important;
+}
+.btn:hover, .button-3:hover, .ant-btn-primary:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+.btn:active, .button-3:active, .ant-btn-primary:active{
+  transform: translateY(3px);
+  box-shadow: 0 5px 0 rgba(0,0,0,.35), inset 0 0 0 2px rgba(0,0,0,.18) !important;
+}
+
+.nsk-pager .pager-pos{
+  background: rgba(18,26,22,.55) !important;
+  border: 2px solid var(--glass-bd) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 0 rgba(0,0,0,.35) !important;
+}
+.nsk-pager .pager-cur{
+  background: linear-gradient(180deg, var(--mc-diamond), #1fbf9a) !important;
+  border-color: rgba(255,255,255,.22) !important;
+  color: #061012 !important;
+}
+
+/* -------------------------
+   7) Inventory-slot navigation
+   - Desktop: grid-ish
+   - Mobile: horizontal scroll (inventory bar)
+   ------------------------- */
+
+/* Containers */
+.nav-menu, .nav-menu ul,
+.post-list-controler .tab-list,
+.post-list-controler .tabs,
+.post-list-controler .tab-nav,
+.post-list-controler .post-tabs,
+.post-list-controler .category-tabs{
+  display:flex !important;
+  flex-wrap: wrap !important;
+  gap: var(--slot-gap) !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+
+  padding: 10px 12px !important;
+}
+
+/* Slot items */
+.nav-menu a,
+.post-list-controler a,
+.post-list-controler .tab,
+.post-list-controler .tab-item{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  width: var(--slot) !important;
+  height: var(--slot) !important;
+  min-width: var(--slot) !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  border-radius: var(--slot-radius) !important;
+  border: 2px solid var(--slot-bd) !important;
+
+  background:
+    linear-gradient(180deg, var(--slot-hi), rgba(255,255,255,0) 45%),
+    linear-gradient(180deg, var(--slot-bg1), var(--slot-bg2)) !important;
+
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.10),
+    inset 0 -2px 0 rgba(0,0,0,.35),
+    0 6px 0 rgba(0,0,0,.30) !important;
+
+  color: var(--mc-text) !important;
+  text-decoration:none !important;
+  white-space: nowrap !important;
+}
+
+/* Hover / Active */
+.nav-menu a:hover,
+.post-list-controler a:hover,
+.post-list-controler .tab:hover{
+  border-color: rgba(77,231,255,.35) !important;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.12),
+    inset 0 -2px 0 rgba(0,0,0,.35),
+    0 6px 0 rgba(0,0,0,.30),
+    0 0 16px rgba(77,231,255,.12) !important;
+}
+.nav-menu a:active,
+.post-list-controler a:active,
+.post-list-controler .tab:active{
+  transform: translateY(3px) !important;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.10),
+    inset 0 -2px 0 rgba(0,0,0,.35),
+    0 3px 0 rgba(0,0,0,.30) !important;
+}
+
+/* Current / active slot */
+.nav-menu .active a,
+.nav-menu a.active,
+.post-list-controler .active,
+.post-list-controler .tab-active,
+.post-list-controler .cur{
+  border-color: rgba(58,166,85,.65) !important;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.12),
+    inset 0 -2px 0 rgba(0,0,0,.35),
+    0 6px 0 rgba(0,0,0,.30),
+    0 0 18px rgba(58,166,85,.14) !important;
+}
+
+/* Mobile inventory bar */
+@media (max-width: 768px){
+  :root{
+    --slot: 46px;
+    --slot-gap: 8px;
+  }
+
+  .nav-menu, .nav-menu ul,
+  .post-list-controler .tab-list,
+  .post-list-controler .tabs,
+  .post-list-controler .tab-nav,
+  .post-list-controler .post-tabs,
+  .post-list-controler .category-tabs{
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    padding: 10px 10px !important;
+  }
+  .nav-menu::-webkit-scrollbar,
+  .nav-menu ul::-webkit-scrollbar,
+  .post-list-controler .tab-list::-webkit-scrollbar,
+  .post-list-controler .tabs::-webkit-scrollbar{
+    height: 0 !important;
+  }
+
+  /* Reduce depth for smoother scrolling */
+  #nsk-left-panel-container .nsk-panel,
+  #nsk-right-panel-container .nsk-panel,
+  .post-list-item{
+    box-shadow: var(--depth-sm) !important;
+  }
+
+  /* Slot text sizing */
+  .nav-menu a,
+  .post-list-controler a,
+  .post-list-controler .tab,
+  .post-list-controler .tab-item{
+    font-size: 13px !important;
+    line-height: 1 !important;
+  }
+}
+
+@media (max-width: 420px){
+  :root{ --slot: 42px; --slot-gap: 7px; }
+  .nav-menu a,
+  .post-list-controler a,
+  .post-list-controler .tab,
+  .post-list-controler .tab-item{
+    font-size: 12px !important;
+  }
+}
+
+/* -------------------------
+   8) Modal fix (keep your logic)
+   ------------------------- */
+.msc-overlay{ display:none; }
+.msc-confirm{ pointer-events:none; }
+.msc-content{
+  pointer-events:auto;
+  opacity:.96;
+}
+
+/* -------------------------
+   9) Code blocks (readability)
+   ------------------------- */
+pre, code{
+  background: rgba(0,0,0,.18) !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+}
+@media (prefers-color-scheme: dark){
+  pre, code{
+    background: rgba(0,0,0,.28) !important;
+    border-color: rgba(255,255,255,.14) !important;
+  }
+}
+
+/* -------------------------
+   10) Footer
+   ------------------------- */
+footer{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+footer .group-head-link{
+  color: var(--mc-oak) !important;
+}
+footer .group-head-link:hover{
+  color: var(--mc-diamond) !important;
+  text-shadow: 0 0 10px rgba(77,231,255,.18) !important;
+}
