@@ -1,116 +1,107 @@
 /* =========================================================
-   NodeSeek Minecraft Theme V3.0 (Clean)
-   - Day: no wallpaper
-   - Night: fixed wallpaper (current)
-   - Frosted glass UI
-   - Inventory-slot navigation (mobile friendly)
-   - Pixel fonts: GNU Unifont (CJK) + Mojangles (if available)
+   NodeSeek Minecraft Theme V3.1 (Refined)
+   - 更像原版 GUI：更方、更硬朗、更高对比
+   - 日间无壁纸；夜间固定壁纸
+   - 毛玻璃更克制，卡片不再一片灰
+   - 顶部导航/分类/分页统一“物品栏格子”
    ========================================================= */
 
-/* -------------------------
-   0) Fonts (Pixel)
-   ------------------------- */
-
-/* Mojangles: if CDN blocked, it simply falls back */
+/* ---------------- Fonts ---------------- */
 @font-face{
   font-family:"Mojangles";
   src:url("https://cdn.jsdelivr.net/gh/IdreesInc/Minecraft-Font@master/font/Minecraftia-Regular.woff2") format("woff2");
   font-display:swap;
 }
-
-/* GNU Unifont: strong pixel CJK */
 @font-face{
   font-family:"GNUUnifont";
   src:url("https://unpkg.com/unifont@latest/font-builds/unifont-15.0.01.woff2") format("woff2");
   font-display:swap;
 }
 
-/* -------------------------
-   1) Variables
-   ------------------------- */
+/* ---------------- Variables ---------------- */
 :root{
-  /* Palette */
-  --mc-bg: #0b0f12;
-  --mc-text: #eef6f2;
-  --mc-muted: #b4c8bf;
+  --mc-bg:#070b0d;
+  --mc-text:#eef6f2;
+  --mc-muted:#b7c9c0;
 
-  --mc-grass: #3aa655;
+  --mc-grass:#3aa655;
   --mc-grass2:#2e8744;
-  --mc-dirt:  #8b5a2b;
-  --mc-oak:   #b98752;
+  --mc-dirt:#8b5a2b;
+  --mc-oak:#b98752;
   --mc-diamond:#4de7ff;
 
-  /* Glass system */
-  --glass-lite: rgba(255,255,255,.12); /* day */
-  --glass-dark: rgba(0,0,0,.38);       /* night */
-  --glass-bd:   rgba(255,255,255,.16);
-  --glass-bd2:  rgba(255,255,255,.22);
-  --glass-blur: 10px;
+  /* Glass: 收敛一点，别“整块灰” */
+  --glass-lite: rgba(20,30,26,.52);
+  --glass-dark: rgba(10,14,13,.58);
+  --glass-bd: rgba(255,255,255,.14);
+  --glass-bd2: rgba(255,255,255,.18);
+  --glass-blur: 9px;
 
-  /* Shadow / depth (MC UI-ish) */
-  --depth: 0 10px 0 rgba(0,0,0,.35);
-  --depth-sm: 0 8px 0 rgba(0,0,0,.30);
+  /* MC GUI：更方 */
+  --r: 6px;
 
-  /* Inventory slots */
-  --slot: 56px;        /* desktop slot size */
+  /* Depth */
+  --depth: 0 10px 0 rgba(0,0,0,.38);
+  --depth-sm: 0 8px 0 rgba(0,0,0,.32);
+
+  /* Inventory slot */
+  --slot: 52px;
   --slot-gap: 10px;
-  --slot-radius: 10px;
-  --slot-bd: rgba(0,0,0,.35);
-  --slot-hi: rgba(255,255,255,.12);
-  --slot-bg1: rgba(18,26,22,.78);
-  --slot-bg2: rgba(10,16,14,.78);
+  --slot-bd: rgba(0,0,0,.45);
+  --slot-hi: rgba(255,255,255,.10);
+  --slot-bg1: rgba(16,22,20,.78);
+  --slot-bg2: rgba(10,14,13,.82);
 
   /* Typography */
   --px-size: 15px;
-  --px-line: 1.6;
+  --px-line: 1.55;
 }
 
-/* -------------------------
-   2) Global reset / base
-   ------------------------- */
+/* ---------------- Base ---------------- */
 html, body{
   height:100% !important;
   margin:0 !important;
   padding:0 !important;
   overflow-x:hidden !important;
 }
-
 a.promotation-item{ display:none !important; }
 
-/* Pixel font everywhere (clean + consistent) */
 html, body, #nsk-frame, #nsk-frame *{
-  font-family: "GNUUnifont","Mojangles",monospace !important;
+  font-family:"GNUUnifont","Mojangles",monospace !important;
   font-size: var(--px-size) !important;
   line-height: var(--px-line) !important;
-  letter-spacing: .2px !important;
-  text-transform: none !important;
-
-  -webkit-font-smoothing: none;
-  -moz-osx-font-smoothing: unset;
-  text-rendering: optimizeSpeed;
+  letter-spacing:.15px !important;
+  text-transform:none !important;
+  -webkit-font-smoothing:none;
+  -moz-osx-font-smoothing:unset;
+  text-rendering:optimizeSpeed;
 }
 
-/* Links */
-a{
-  color: var(--mc-grass) !important;
-  text-decoration:none !important;
-  transition: all .18s ease;
-}
-a:hover{
-  color: var(--mc-diamond) !important;
-  text-shadow: 0 0 10px rgba(77,231,255,.20) !important;
-}
+a{ color:var(--mc-grass) !important; text-decoration:none !important; transition:.18s; }
+a:hover{ color:var(--mc-diamond) !important; text-shadow:0 0 10px rgba(77,231,255,.18) !important; }
 
-/* -------------------------
-   3) Wallpaper policy
-   - Day: none
-   - Night: fixed wallpaper
-   ------------------------- */
+/* ---------------- Wallpaper policy (Day: separate PC/Mobile, Night: current) ---------------- */
+
+/* Day default: PC wallpaper */
 body, #nsk-frame{
   background-color: var(--mc-bg) !important;
-  background-image: none !important;
+  background-image: url("https://img.jingsublog.com/i/2026/02/12/nc8ha0.png") !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center top !important;
+  background-attachment: fixed !important;
 }
 
+/* Day mobile wallpaper */
+@media (max-width: 768px){
+  body, #nsk-frame{
+    background-image: url("https://img.jingsublog.com/i/2026/02/12/nc8avz.png") !important;
+    background-position: center top !important;
+    background-attachment: scroll !important; /* mobile smoother */
+  }
+}
+
+/* Night wallpaper (current) */
 @media (prefers-color-scheme: dark){
   body, #nsk-frame{
     background-image: url("https://img.jingsublog.com/i/2026/02/12/5ibmuf.png") !important;
@@ -121,7 +112,7 @@ body, #nsk-frame{
   }
 }
 
-/* Mobile: avoid fixed attachment jank */
+/* Night mobile: avoid fixed jank */
 @media (max-width: 768px){
   @media (prefers-color-scheme: dark){
     body, #nsk-frame{
@@ -131,9 +122,7 @@ body, #nsk-frame{
   }
 }
 
-/* -------------------------
-   4) Frosted glass surfaces
-   ------------------------- */
+/* ---------------- Frosted surfaces ---------------- */
 header, #nsk-head,
 #nsk-left-panel-container .nsk-panel,
 #nsk-right-panel-container .nsk-panel,
@@ -143,13 +132,11 @@ header, #nsk-head,
 .msc-content{
   background: var(--glass-lite) !important;
   border: 2px solid var(--glass-bd) !important;
-  border-radius: 10px !important;
+  border-radius: var(--r) !important;
   box-shadow: var(--depth) !important;
-
   -webkit-backdrop-filter: blur(var(--glass-blur));
   backdrop-filter: blur(var(--glass-blur));
 }
-
 @media (prefers-color-scheme: dark){
   header, #nsk-head,
   #nsk-left-panel-container .nsk-panel,
@@ -163,157 +150,113 @@ header, #nsk-head,
   }
 }
 
-/* Header grass strip (MC vibe, not too loud) */
-header, #nsk-head{
-  position: relative;
-  border-bottom-color: rgba(58,166,85,.55) !important;
-}
+/* Header: 草方块条更像原版，不突兀 */
+header, #nsk-head{ position:relative; }
 header::after, #nsk-head::after{
   content:"";
-  position:absolute;
-  left:0; right:0; bottom:-2px;
+  position:absolute; left:0; right:0; bottom:-2px;
   height:10px;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,0) 60%),
+    linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0) 60%),
     repeating-linear-gradient(90deg, var(--mc-grass) 0 12px, var(--mc-grass2) 12px 24px);
-  border-bottom:2px solid rgba(0,0,0,.25);
+  border-bottom:2px solid rgba(0,0,0,.28);
+  opacity:.70;
   pointer-events:none;
-  opacity:.75;
 }
 
-/* Search box */
+/* Search */
 .search-box input[type="text"]{
-  background: rgba(10,16,14,.72) !important;
-  border: 2px solid var(--glass-bd2) !important;
+  background: rgba(8,10,10,.55) !important;
+  border: 2px solid rgba(255,255,255,.18) !important;
   color: var(--mc-text) !important;
-  border-radius: 8px !important;
-  box-shadow: inset 0 0 0 2px rgba(0,0,0,.25);
+  border-radius: var(--r) !important;
+  box-shadow: inset 0 0 0 2px rgba(0,0,0,.25) !important;
 }
 .search-box input[type="text"]:focus{
   outline:none !important;
   border-color: rgba(77,231,255,.55) !important;
-  box-shadow: 0 0 0 4px rgba(77,231,255,.12), inset 0 0 0 2px rgba(0,0,0,.25);
+  box-shadow: 0 0 0 4px rgba(77,231,255,.10), inset 0 0 0 2px rgba(0,0,0,.25) !important;
 }
 
-/* -------------------------
-   5) Post list cards (pixel corners)
-   ------------------------- */
+/* ---------------- Post cards: 更像 MC 列表 ---------------- */
 .post-list-item{
-  position: relative;
-  transition: all .18s ease;
+  position:relative;
+  transition:.18s;
 }
-.post-list-item:hover{
-  border-color: rgba(77,231,255,.40) !important;
-  box-shadow: var(--depth), 0 0 16px rgba(77,231,255,.10) !important;
-  transform: translateY(-2px);
-}
-
-/* Pixel corners: grass & dirt */
-.post-list-item::before,
-.post-list-item::after{
+/* 左侧“草绿条”作为选中/信息密度视觉锚点 */
+.post-list-item::before{
   content:"";
   position:absolute;
-  width:14px; height:14px;
-  border:3px solid transparent;
-  pointer-events:none;
+  left:-2px; top:-2px; bottom:-2px;
+  width:8px;
+  background: linear-gradient(180deg, var(--mc-grass), var(--mc-grass2));
+  border-top-left-radius: var(--r);
+  border-bottom-left-radius: var(--r);
+  opacity:.85;
 }
-.post-list-item::before{
-  top:-3px; left:-3px;
-  border-top-color: var(--mc-grass);
-  border-left-color: var(--mc-grass);
+.post-list-item:hover{
+  border-color: rgba(77,231,255,.35) !important;
+  box-shadow: var(--depth), 0 0 14px rgba(77,231,255,.08) !important;
+  transform: translateY(-2px);
 }
-.post-list-item::after{
-  bottom:-3px; right:-3px;
-  border-bottom-color: var(--mc-dirt);
-  border-right-color: var(--mc-dirt);
-}
+.post-title a{ color:var(--mc-text) !important; }
+.post-info, .post-info span, .post-info time{ color:var(--mc-muted) !important; }
+.post-info .info-author a, .post-info .info-last-commenter a{ color:var(--mc-grass) !important; }
 
-/* Title / meta colors */
-.post-title a{ color: var(--mc-text) !important; }
-.post-info, .post-info span, .post-info time{ color: var(--mc-muted) !important; }
-.post-info .info-author a, .post-info .info-last-commenter a{ color: var(--mc-grass) !important; }
-
-/* Category = wooden sign */
+/* 分类木牌更“硬”一点 */
 .post-category{
   background: linear-gradient(180deg, var(--mc-oak), var(--mc-dirt)) !important;
-  color: #1b1207 !important;
-  border: 2px solid rgba(0,0,0,.25) !important;
+  color:#1b1207 !important;
+  border:2px solid rgba(0,0,0,.30) !important;
+  border-radius: 5px !important;
   padding: 2px 7px !important;
-  border-radius: 8px !important;
-  box-shadow: 0 6px 0 rgba(0,0,0,.28) !important;
+  box-shadow: 0 6px 0 rgba(0,0,0,.30) !important;
 }
 
-/* Sticky carousel */
-.topic-carousel-wrapper{
-  border-color: rgba(58,166,85,.55) !important;
-}
-
-/* -------------------------
-   6) Buttons & pager (MC-like)
-   ------------------------- */
+/* ---------------- Buttons ---------------- */
 .btn, .button-3, .ant-btn-primary{
   background:
-    linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0) 45%),
+    linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,0) 45%),
     linear-gradient(180deg, var(--mc-grass), var(--mc-grass2)) !important;
-  border: 2px solid var(--glass-bd2) !important;
-  color: #07100d !important;
-  font-weight: 900 !important;
-  border-radius: 10px !important;
-  box-shadow: 0 8px 0 rgba(0,0,0,.35), inset 0 0 0 2px rgba(0,0,0,.18) !important;
-  transition: all .18s ease !important;
+  border:2px solid rgba(255,255,255,.18) !important;
+  color:#07100d !important;
+  font-weight:900 !important;
+  border-radius: var(--r) !important;
+  box-shadow: 0 8px 0 rgba(0,0,0,.36), inset 0 0 0 2px rgba(0,0,0,.18) !important;
+  transition:.18s !important;
 }
-.btn:hover, .button-3:hover, .ant-btn-primary:hover{
-  transform: translateY(-1px);
-  filter: brightness(1.05);
-}
+.btn:hover, .button-3:hover, .ant-btn-primary:hover{ transform: translateY(-1px); filter: brightness(1.05); }
 .btn:active, .button-3:active, .ant-btn-primary:active{
   transform: translateY(3px);
-  box-shadow: 0 5px 0 rgba(0,0,0,.35), inset 0 0 0 2px rgba(0,0,0,.18) !important;
+  box-shadow: 0 5px 0 rgba(0,0,0,.36), inset 0 0 0 2px rgba(0,0,0,.18) !important;
 }
 
-.nsk-pager .pager-pos{
-  background: rgba(18,26,22,.55) !important;
-  border: 2px solid var(--glass-bd) !important;
-  border-radius: 10px !important;
-  box-shadow: 0 8px 0 rgba(0,0,0,.35) !important;
-}
-.nsk-pager .pager-cur{
-  background: linear-gradient(180deg, var(--mc-diamond), #1fbf9a) !important;
-  border-color: rgba(255,255,255,.22) !important;
-  color: #061012 !important;
-}
-
-/* -------------------------
-   7) Inventory-slot navigation
-   - Desktop: grid-ish
-   - Mobile: horizontal scroll (inventory bar)
-   ------------------------- */
-
+/* ---------------- Inventory-slot navigation (Top + Tabs + Pager) ---------------- */
 /* Containers */
 .nav-menu, .nav-menu ul,
 .post-list-controler .tab-list,
 .post-list-controler .tabs,
 .post-list-controler .tab-nav,
 .post-list-controler .post-tabs,
-.post-list-controler .category-tabs{
+.post-list-controler .category-tabs,
+.nsk-pager{
   display:flex !important;
-  flex-wrap: wrap !important;
+  align-items:center !important;
   gap: var(--slot-gap) !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-
+  flex-wrap: wrap !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-
   padding: 10px 12px !important;
 }
 
-/* Slot items */
+/* Slots */
 .nav-menu a,
 .post-list-controler a,
 .post-list-controler .tab,
-.post-list-controler .tab-item{
+.post-list-controler .tab-item,
+.nsk-pager a,
+.nsk-pager .pager-pos{
   display:inline-flex !important;
   align-items:center !important;
   justify-content:center !important;
@@ -322,10 +265,10 @@ header::after, #nsk-head::after{
   height: var(--slot) !important;
   min-width: var(--slot) !important;
 
-  padding: 0 !important;
-  margin: 0 !important;
+  padding:0 !important;
+  margin:0 !important;
 
-  border-radius: var(--slot-radius) !important;
+  border-radius: var(--r) !important;
   border: 2px solid var(--slot-bd) !important;
 
   background:
@@ -334,62 +277,70 @@ header::after, #nsk-head::after{
 
   box-shadow:
     inset 0 2px 0 rgba(255,255,255,.10),
-    inset 0 -2px 0 rgba(0,0,0,.35),
-    0 6px 0 rgba(0,0,0,.30) !important;
+    inset 0 -2px 0 rgba(0,0,0,.42),
+    0 6px 0 rgba(0,0,0,.34) !important;
 
   color: var(--mc-text) !important;
-  text-decoration:none !important;
   white-space: nowrap !important;
 }
 
 /* Hover / Active */
 .nav-menu a:hover,
 .post-list-controler a:hover,
-.post-list-controler .tab:hover{
-  border-color: rgba(77,231,255,.35) !important;
+.post-list-controler .tab:hover,
+.nsk-pager a:hover{
+  border-color: rgba(77,231,255,.28) !important;
   box-shadow:
     inset 0 2px 0 rgba(255,255,255,.12),
-    inset 0 -2px 0 rgba(0,0,0,.35),
-    0 6px 0 rgba(0,0,0,.30),
-    0 0 16px rgba(77,231,255,.12) !important;
+    inset 0 -2px 0 rgba(0,0,0,.42),
+    0 6px 0 rgba(0,0,0,.34),
+    0 0 14px rgba(77,231,255,.10) !important;
 }
 .nav-menu a:active,
 .post-list-controler a:active,
-.post-list-controler .tab:active{
+.post-list-controler .tab:active,
+.nsk-pager a:active{
   transform: translateY(3px) !important;
   box-shadow:
     inset 0 2px 0 rgba(255,255,255,.10),
-    inset 0 -2px 0 rgba(0,0,0,.35),
-    0 3px 0 rgba(0,0,0,.30) !important;
+    inset 0 -2px 0 rgba(0,0,0,.42),
+    0 3px 0 rgba(0,0,0,.34) !important;
 }
 
-/* Current / active slot */
+/* Current slot */
 .nav-menu .active a,
 .nav-menu a.active,
 .post-list-controler .active,
 .post-list-controler .tab-active,
-.post-list-controler .cur{
-  border-color: rgba(58,166,85,.65) !important;
+.post-list-controler .cur,
+.nsk-pager .pager-cur{
+  border-color: rgba(58,166,85,.60) !important;
   box-shadow:
     inset 0 2px 0 rgba(255,255,255,.12),
-    inset 0 -2px 0 rgba(0,0,0,.35),
-    0 6px 0 rgba(0,0,0,.30),
-    0 0 18px rgba(58,166,85,.14) !important;
+    inset 0 -2px 0 rgba(0,0,0,.42),
+    0 6px 0 rgba(0,0,0,.34),
+    0 0 16px rgba(58,166,85,.14) !important;
 }
 
-/* Mobile inventory bar */
-@media (max-width: 768px){
-  :root{
-    --slot: 46px;
-    --slot-gap: 8px;
-  }
+/* Pager “当前页”不再做一条长灰块 */
+.nsk-pager .pager-cur{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,0) 45%),
+    linear-gradient(180deg, rgba(58,166,85,.95), rgba(46,135,68,.95)) !important;
+  color:#061012 !important;
+}
+
+/* ---------------- Mobile: inventory bar scroll ---------------- */
+@media (max-width:768px){
+  :root{ --slot: 44px; --slot-gap: 8px; }
 
   .nav-menu, .nav-menu ul,
   .post-list-controler .tab-list,
   .post-list-controler .tabs,
   .post-list-controler .tab-nav,
   .post-list-controler .post-tabs,
-  .post-list-controler .category-tabs{
+  .post-list-controler .category-tabs,
+  .nsk-pager{
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
     overflow-y: hidden !important;
@@ -398,75 +349,4 @@ header::after, #nsk-head::after{
     padding: 10px 10px !important;
   }
   .nav-menu::-webkit-scrollbar,
-  .nav-menu ul::-webkit-scrollbar,
-  .post-list-controler .tab-list::-webkit-scrollbar,
-  .post-list-controler .tabs::-webkit-scrollbar{
-    height: 0 !important;
-  }
-
-  /* Reduce depth for smoother scrolling */
-  #nsk-left-panel-container .nsk-panel,
-  #nsk-right-panel-container .nsk-panel,
-  .post-list-item{
-    box-shadow: var(--depth-sm) !important;
-  }
-
-  /* Slot text sizing */
-  .nav-menu a,
-  .post-list-controler a,
-  .post-list-controler .tab,
-  .post-list-controler .tab-item{
-    font-size: 13px !important;
-    line-height: 1 !important;
-  }
-}
-
-@media (max-width: 420px){
-  :root{ --slot: 42px; --slot-gap: 7px; }
-  .nav-menu a,
-  .post-list-controler a,
-  .post-list-controler .tab,
-  .post-list-controler .tab-item{
-    font-size: 12px !important;
-  }
-}
-
-/* -------------------------
-   8) Modal fix (keep your logic)
-   ------------------------- */
-.msc-overlay{ display:none; }
-.msc-confirm{ pointer-events:none; }
-.msc-content{
-  pointer-events:auto;
-  opacity:.96;
-}
-
-/* -------------------------
-   9) Code blocks (readability)
-   ------------------------- */
-pre, code{
-  background: rgba(0,0,0,.18) !important;
-  border: 1px solid rgba(255,255,255,.10) !important;
-}
-@media (prefers-color-scheme: dark){
-  pre, code{
-    background: rgba(0,0,0,.28) !important;
-    border-color: rgba(255,255,255,.14) !important;
-  }
-}
-
-/* -------------------------
-   10) Footer
-   ------------------------- */
-footer{
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-footer .group-head-link{
-  color: var(--mc-oak) !important;
-}
-footer .group-head-link:hover{
-  color: var(--mc-diamond) !important;
-  text-shadow: 0 0 10px rgba(77,231,255,.18) !important;
-}
+  .nav-menu ul
