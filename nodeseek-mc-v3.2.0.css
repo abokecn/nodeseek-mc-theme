@@ -1,0 +1,375 @@
+/* =========================================================
+   NodeSeek Minecraft Theme V3.2 (Clean, No Inventory Nav)
+   - Day PC bg: nc8ha0.png
+   - Day Mobile bg: nc8avz.png
+   - Night bg: 5ibmuf.png
+   - Frosted glass UI
+   - Pixel fonts (GNU Unifont; Mojangles fallback)
+   ========================================================= */
+
+/* ---------------- Fonts ---------------- */
+@font-face{
+  font-family:"Mojangles";
+  src:url("https://cdn.jsdelivr.net/gh/IdreesInc/Minecraft-Font@master/font/Minecraftia-Regular.woff2") format("woff2");
+  font-display:swap;
+}
+@font-face{
+  font-family:"GNUUnifont";
+  src:url("https://unpkg.com/unifont@latest/font-builds/unifont-15.0.01.woff2") format("woff2");
+  font-display:swap;
+}
+
+/* ---------------- Variables ---------------- */
+:root{
+  --mc-bg:#070b0d;
+  --mc-text:#eef6f2;
+  --mc-muted:#b7c9c0;
+
+  --mc-grass:#3aa655;
+  --mc-grass2:#2e8744;
+  --mc-dirt:#8b5a2b;
+  --mc-oak:#b98752;
+  --mc-diamond:#4de7ff;
+
+  /* Glass */
+  --glass-lite: rgba(20,30,26,.52);
+  --glass-dark: rgba(10,14,13,.58);
+  --glass-bd: rgba(255,255,255,.14);
+  --glass-bd2: rgba(255,255,255,.18);
+  --glass-blur: 9px;
+
+  /* Depth */
+  --depth: 0 10px 0 rgba(0,0,0,.38);
+  --depth-sm: 0 8px 0 rgba(0,0,0,.32);
+
+  /* Radius (more MC GUI) */
+  --r: 6px;
+
+  /* Typography */
+  --px-size: 15px;
+  --px-line: 1.55;
+}
+
+/* ---------------- Base / Reset ---------------- */
+html, body{
+  height:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow-x:hidden !important;
+}
+a.promotation-item{ display:none !important; }
+
+/* Pixel font everywhere */
+html, body, #nsk-frame, #nsk-frame *{
+  font-family:"GNUUnifont","Mojangles",monospace !important;
+  font-size: var(--px-size) !important;
+  line-height: var(--px-line) !important;
+  letter-spacing:.15px !important;
+  text-transform:none !important;
+  -webkit-font-smoothing:none;
+  -moz-osx-font-smoothing:unset;
+  text-rendering:optimizeSpeed;
+}
+
+/* Links */
+a{
+  color:var(--mc-grass) !important;
+  text-decoration:none !important;
+  transition:all .18s ease;
+}
+a:hover{
+  color:var(--mc-diamond) !important;
+  text-shadow:0 0 10px rgba(77,231,255,.18) !important;
+}
+
+/* =========================================================
+   Wallpaper (FORCE) - hit html/body/#nsk-frame
+   ========================================================= */
+html, body, #nsk-frame{
+  min-height:100vh !important;
+  background-color:var(--mc-bg) !important;
+  background-repeat:no-repeat !important;
+  background-position:center top !important;
+  background-size:cover !important;
+}
+
+/* Day PC */
+html, body, #nsk-frame{
+  background-image:url("https://img.jingsublog.com/i/2026/02/12/nc8ha0.png") !important;
+  background-attachment:fixed !important;
+}
+
+/* Day Mobile */
+@media (max-width:768px){
+  html, body, #nsk-frame{
+    background-image:url("https://img.jingsublog.com/i/2026/02/12/nc8avz.png") !important;
+    background-attachment:scroll !important;
+  }
+}
+
+/* Night */
+@media (prefers-color-scheme: dark){
+  html, body, #nsk-frame{
+    background-image:url("https://img.jingsublog.com/i/2026/02/12/5ibmuf.png") !important;
+    background-position:center center !important;
+    background-attachment:fixed !important;
+  }
+}
+/* Night Mobile */
+@media (max-width:768px){
+  @media (prefers-color-scheme: dark){
+    html, body, #nsk-frame{
+      background-attachment:scroll !important;
+      background-position:center top !important;
+    }
+  }
+}
+
+/* ---------------- Frosted glass surfaces ---------------- */
+header, #nsk-head,
+#nsk-left-panel-container .nsk-panel,
+#nsk-right-panel-container .nsk-panel,
+.post-list-controler, .nsk-pager, .post-list-item,
+.head-container, .selector,
+#nsk-body, .board,
+.msc-content{
+  background: var(--glass-lite) !important;
+  border: 2px solid var(--glass-bd) !important;
+  border-radius: var(--r) !important;
+  box-shadow: var(--depth) !important;
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+}
+@media (prefers-color-scheme: dark){
+  header, #nsk-head,
+  #nsk-left-panel-container .nsk-panel,
+  #nsk-right-panel-container .nsk-panel,
+  .post-list-controler, .nsk-pager, .post-list-item,
+  .head-container, .selector,
+  #nsk-body, .board,
+  .msc-content{
+    background: var(--glass-dark) !important;
+    border-color: var(--glass-bd2) !important;
+  }
+}
+
+/* Header grass strip (subtle) */
+header, #nsk-head{ position:relative; }
+header::after, #nsk-head::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-2px;
+  height:10px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0) 60%),
+    repeating-linear-gradient(90deg, var(--mc-grass) 0 12px, var(--mc-grass2) 12px 24px);
+  border-bottom:2px solid rgba(0,0,0,.28);
+  opacity:.70;
+  pointer-events:none;
+}
+
+/* Search */
+.search-box input[type="text"]{
+  background: rgba(8,10,10,.55) !important;
+  border: 2px solid rgba(255,255,255,.18) !important;
+  color: var(--mc-text) !important;
+  border-radius: var(--r) !important;
+  box-shadow: inset 0 0 0 2px rgba(0,0,0,.25) !important;
+}
+.search-box input[type="text"]:focus{
+  outline:none !important;
+  border-color: rgba(77,231,255,.55) !important;
+  box-shadow: 0 0 0 4px rgba(77,231,255,.10), inset 0 0 0 2px rgba(0,0,0,.25) !important;
+}
+
+/* ---------------- Post list cards ---------------- */
+.post-list-item{
+  position:relative;
+  transition:all .18s ease;
+}
+/* Left grass bar as anchor */
+.post-list-item::before{
+  content:"";
+  position:absolute;
+  left:-2px; top:-2px; bottom:-2px;
+  width:8px;
+  background: linear-gradient(180deg, var(--mc-grass), var(--mc-grass2));
+  border-top-left-radius: var(--r);
+  border-bottom-left-radius: var(--r);
+  opacity:.85;
+}
+.post-list-item:hover{
+  border-color: rgba(77,231,255,.35) !important;
+  box-shadow: var(--depth), 0 0 14px rgba(77,231,255,.08) !important;
+  transform: translateY(-2px);
+}
+
+.post-title a{ color:var(--mc-text) !important; }
+.post-info, .post-info span, .post-info time{ color:var(--mc-muted) !important; }
+.post-info .info-author a, .post-info .info-last-commenter a{ color:var(--mc-grass) !important; }
+
+/* Category = wooden sign */
+.post-category{
+  background: linear-gradient(180deg, var(--mc-oak), var(--mc-dirt)) !important;
+  color:#1b1207 !important;
+  border:2px solid rgba(0,0,0,.30) !important;
+  border-radius: 5px !important;
+  padding: 2px 7px !important;
+  box-shadow: 0 6px 0 rgba(0,0,0,.30) !important;
+}
+
+/* Sticky carousel */
+.topic-carousel-wrapper{
+  border: 2px solid rgba(58,166,85,.45) !important;
+  border-radius: var(--r) !important;
+}
+
+/* ---------------- Buttons ---------------- */
+.btn, .button-3, .ant-btn-primary{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,0) 45%),
+    linear-gradient(180deg, var(--mc-grass), var(--mc-grass2)) !important;
+  border:2px solid rgba(255,255,255,.18) !important;
+  color:#07100d !important;
+  font-weight:900 !important;
+  border-radius: var(--r) !important;
+  box-shadow: 0 8px 0 rgba(0,0,0,.36), inset 0 0 0 2px rgba(0,0,0,.18) !important;
+  transition:all .18s ease !important;
+}
+.btn:hover, .button-3:hover, .ant-btn-primary:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+.btn:active, .button-3:active, .ant-btn-primary:active{
+  transform: translateY(3px);
+  box-shadow: 0 5px 0 rgba(0,0,0,.36), inset 0 0 0 2px rgba(0,0,0,.18) !important;
+}
+
+/* =========================================================
+   Clean navigation (No inventory slots)
+   ========================================================= */
+
+/* Top nav */
+.nav-menu, .nav-menu ul{
+  display:flex !important;
+  align-items:center !important;
+  gap:18px !important;
+  flex-wrap:wrap !important;
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  padding:10px 18px !important;
+}
+
+.nav-menu a{
+  padding:6px 12px !important;
+  border-radius: var(--r) !important;
+  background: rgba(0,0,0,.22) !important;
+  border:2px solid rgba(255,255,255,.15) !important;
+  box-shadow:0 6px 0 rgba(0,0,0,.35) !important;
+  transition:all .18s ease !important;
+}
+.nav-menu a:hover{
+  border-color: rgba(77,231,255,.30) !important;
+  box-shadow:0 6px 0 rgba(0,0,0,.35), 0 0 12px rgba(77,231,255,.12) !important;
+}
+.nav-menu .active a, .nav-menu a.active{
+  background: linear-gradient(180deg, var(--mc-grass), var(--mc-grass2)) !important;
+  color:#07100d !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+
+/* Category tabs / list controller */
+.post-list-controler{
+  display:flex !important;
+  align-items:center !important;
+  gap:14px !important;
+  flex-wrap:wrap !important;
+  padding:12px 18px !important;
+}
+.post-list-controler a{
+  padding:5px 10px !important;
+  border-radius: var(--r) !important;
+  background: rgba(0,0,0,.22) !important;
+  border:2px solid rgba(255,255,255,.15) !important;
+  box-shadow:0 5px 0 rgba(0,0,0,.35) !important;
+  transition:all .18s ease !important;
+}
+.post-list-controler a:hover{
+  border-color: rgba(77,231,255,.28) !important;
+  box-shadow:0 5px 0 rgba(0,0,0,.35), 0 0 12px rgba(77,231,255,.10) !important;
+}
+.post-list-controler .active,
+.post-list-controler .cur{
+  background: linear-gradient(180deg, var(--mc-grass), var(--mc-grass2)) !important;
+  color:#07100d !important;
+}
+
+/* Pager */
+.nsk-pager{
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  display:flex !important;
+  gap:10px !important;
+  flex-wrap:wrap !important;
+  padding:10px 18px !important;
+}
+.nsk-pager a, .nsk-pager .pager-pos{
+  padding:5px 10px !important;
+  border-radius: var(--r) !important;
+  background: rgba(0,0,0,.22) !important;
+  border:2px solid rgba(255,255,255,.15) !important;
+  box-shadow:0 5px 0 rgba(0,0,0,.35) !important;
+}
+.nsk-pager a:hover{
+  border-color: rgba(77,231,255,.28) !important;
+  box-shadow:0 5px 0 rgba(0,0,0,.35), 0 0 12px rgba(77,231,255,.10) !important;
+}
+.nsk-pager .pager-cur{
+  background: linear-gradient(180deg, var(--mc-grass), var(--mc-grass2)) !important;
+  color:#07100d !important;
+}
+
+/* Mobile nav: horizontal scroll (clean, not slots) */
+@media (max-width:768px){
+  #nsk-left-panel-container .nsk-panel,
+  #nsk-right-panel-container .nsk-panel,
+  .post-list-item{ box-shadow: var(--depth-sm) !important; }
+
+  .nav-menu, .nav-menu ul, .post-list-controler, .nsk-pager{
+    flex-wrap:nowrap !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    -webkit-overflow-scrolling:touch !important;
+    scrollbar-width:none !important;
+  }
+  .nav-menu::-webkit-scrollbar,
+  .nav-menu ul::-webkit-scrollbar,
+  .post-list-controler::-webkit-scrollbar,
+  .nsk-pager::-webkit-scrollbar{ height:0 !important; }
+
+  .nav-menu a, .post-list-controler a, .nsk-pager a, .nsk-pager .pager-pos{
+    white-space:nowrap !important;
+  }
+}
+
+/* ---------------- Modal fix ---------------- */
+.msc-overlay{ display:none; }
+.msc-confirm{ pointer-events:none; }
+.msc-content{ pointer-events:auto; opacity:.96; }
+
+/* ---------------- Code blocks ---------------- */
+pre, code{
+  background: rgba(0,0,0,.20) !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+  border-radius: var(--r) !important;
+}
+
+/* ---------------- Footer ---------------- */
+footer{
+  background: transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+}
+footer .group-head-link{ color: var(--mc-oak) !important; }
+footer .group-head-link:hover{ color: var(--mc-diamond) !important; }
