@@ -1,0 +1,139 @@
+/* NodeSeek Minecraft theme — selectors shared by legacy and current layouts. */
+:root {
+  --mc-page: #c9b487;
+  --mc-parchment: rgba(239, 224, 181, 0.88);
+  --mc-parchment-edge: #765432;
+  --mc-shadow: #3c2918;
+  --mc-grass: #5eaa3b;
+  --mc-grass-dark: #397323;
+  --mc-dirt: #80522d;
+  --mc-stone: rgba(67, 70, 68, 0.92);
+  --mc-stone-edge: #252827;
+  --mc-stone-shadow: #101211;
+  --mc-pixel-border: 3px solid var(--mc-parchment-edge);
+  --mc-pixel-shadow: 5px 5px 0 var(--mc-shadow);
+}
+
+/* Keep the application frame transparent while letting it use the page wallpaper. */
+html,
+body {
+  min-height: 100%;
+  background-color: var(--mc-page);
+  background-image: url("assets/day-pc.png");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#nsk-frame {
+  min-height: 100vh;
+  background-color: transparent !important;
+  background-image: inherit;
+  background-position: inherit;
+  background-repeat: inherit;
+  background-size: inherit;
+  background-attachment: inherit;
+}
+
+/* Header navigation: a grass top layer over Minecraft dirt. */
+header,
+#nsk-head {
+  background:
+    linear-gradient(to bottom, var(--mc-grass) 0 28%, var(--mc-grass-dark) 28% 36%, transparent 36%),
+    linear-gradient(135deg, #95633a 25%, var(--mc-dirt) 25% 50%, #6e4325 50% 75%, var(--mc-dirt) 75%) !important;
+  background-size: auto, 16px 16px !important;
+  border: 3px solid #4e351e !important;
+  box-shadow: 5px 5px 0 #352313 !important;
+}
+
+/* Main layout areas use the parchment Minecraft GUI treatment. */
+.mc-container,
+#nsk-body,
+.head-container,
+.selector,
+.board {
+  background: var(--mc-parchment) !important;
+  border: var(--mc-pixel-border) !important;
+  border-radius: 0 !important;
+  box-shadow: var(--mc-pixel-shadow) !important;
+}
+
+/* Side panels are cards in both the legacy and current NodeSeek markup. */
+.side-card,
+#nsk-left-panel-container .nsk-panel,
+#nsk-right-panel-container .nsk-panel {
+  background: var(--mc-parchment) !important;
+  border: var(--mc-pixel-border) !important;
+  border-radius: 0 !important;
+  box-shadow: var(--mc-pixel-shadow) !important;
+}
+
+/* Topic controls, topic rows, and the carousel share the same card language. */
+.post-card,
+.post-list-controler,
+.post-list-item,
+.topic-carousel-wrapper {
+  background: var(--mc-parchment) !important;
+  border: var(--mc-pixel-border) !important;
+  border-radius: 0 !important;
+  box-shadow: var(--mc-pixel-shadow) !important;
+}
+
+/* Do not rely on collapsed margins: each adjacent card gets a fixed pixel gap. */
+.post-list-controler + .post-list-item,
+.post-list-controler + .topic-carousel-wrapper,
+.post-list-item + .post-list-item,
+.post-list-item + .topic-carousel-wrapper,
+.topic-carousel-wrapper + .post-list-item {
+  margin-top: 12px !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  html,
+  body {
+    background-color: #151817;
+    background-image: url("assets/night-pc.png");
+  }
+
+  header,
+  #nsk-head {
+    background:
+      linear-gradient(to bottom, #818783 0 28%, #555b57 28% 36%, transparent 36%),
+      linear-gradient(135deg, #555a57 25%, #3f4441 25% 50%, #2d312f 50% 75%, #3f4441 75%) !important;
+    border-color: var(--mc-stone-edge) !important;
+    box-shadow: 5px 5px 0 var(--mc-stone-shadow) !important;
+  }
+
+  .mc-container,
+  #nsk-body,
+  .head-container,
+  .selector,
+  .board,
+  .side-card,
+  #nsk-left-panel-container .nsk-panel,
+  #nsk-right-panel-container .nsk-panel,
+  .post-card,
+  .post-list-controler,
+  .post-list-item,
+  .topic-carousel-wrapper {
+    background: var(--mc-stone) !important;
+    border-color: var(--mc-stone-edge) !important;
+    box-shadow: 5px 5px 0 var(--mc-stone-shadow) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    background-image: url("assets/day-mobile.png");
+    background-attachment: scroll;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html,
+    body {
+      background-image: url("assets/night-mobile.png");
+    }
+  }
+}
