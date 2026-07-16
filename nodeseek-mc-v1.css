@@ -1,0 +1,245 @@
+/*
+ * NodeSeek × Minecraft v1
+ * Install as a custom stylesheet. Background assets are kept untouched.
+ */
+
+:root {
+  --mc-ink: #25231d;
+  --mc-ink-soft: #5d5748;
+  --mc-paper: #f5eed7;
+  --mc-paper-light: #fff9e9;
+  --mc-dirt: #76513a;
+  --mc-dirt-dark: #432e24;
+  --mc-dirt-light: #a97855;
+  --mc-grass: #61a937;
+  --mc-grass-light: #8ed34f;
+  --mc-grass-dark: #387622;
+  --mc-stone: #79776d;
+  --mc-stone-light: #aaa89b;
+  --mc-stone-dark: #4e4d48;
+  --mc-water: #3f83b9;
+  --mc-water-dark: #205884;
+  --mc-gold: #e5b84c;
+  --mc-danger: #a73e32;
+  --mc-shadow: 4px 4px 0 rgba(46, 33, 25, .82);
+  --mc-shadow-small: 2px 2px 0 rgba(46, 33, 25, .78);
+  --mc-pixel-border: 2px solid var(--mc-dirt-dark);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  min-height: 100%;
+  background: #87c9e8 url("assets/day-pc.png") center top / cover fixed no-repeat;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--mc-ink);
+  background: transparent !important;
+  font-family: "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  line-height: 1.65;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .25);
+}
+
+/* Main page shells used across NodeSeek layouts. */
+#Wrapper, #Main, #Rightbar, .box, .content, .container, .page, .card,
+.v-card, .topic-list, .cell, .topic, .reply, .post, .sidebar {
+  border-radius: 0 !important;
+}
+
+#Wrapper { background: transparent !important; }
+
+#Main, .container > .content, .page-content {
+  background: rgba(245, 238, 215, .94);
+  border: var(--mc-pixel-border);
+  box-shadow: var(--mc-shadow);
+}
+
+/* Header and navigation: grass block cap over a dirt face. */
+#Top, #Header, header, .navbar, .topbar, .header {
+  color: #fff9de;
+  background: linear-gradient(to bottom, var(--mc-grass-light) 0 5px, var(--mc-grass-dark) 5px 9px, var(--mc-dirt) 9px 100%) !important;
+  border-top: 2px solid #b2e866;
+  border-bottom: 3px solid var(--mc-dirt-dark);
+  box-shadow: 0 3px 0 rgba(52, 35, 24, .86);
+  text-shadow: 2px 2px 0 #35281d;
+}
+
+#Top a, #Header a, header a, .navbar a, .topbar a, .header a {
+  color: #fffce8 !important;
+  font-weight: 700;
+}
+
+#Top a:hover, #Header a:hover, header a:hover, .navbar a:hover, .topbar a:hover, .header a:hover {
+  color: #fff !important;
+  background: rgba(255,255,255,.15);
+  text-decoration: none;
+}
+
+/* Cards, topic rows and side modules. */
+.box, .v-card, .card, .sidebar .box, #Rightbar .box, .cell, .topic-list,
+.topic, .reply, .post, .panel, .widget {
+  color: var(--mc-ink);
+  background: var(--mc-paper) !important;
+  border: var(--mc-pixel-border) !important;
+  box-shadow: var(--mc-shadow-small);
+}
+
+.box + .box, .v-card + .v-card, .sidebar .box + .box, #Rightbar .box + .box { margin-top: 14px; }
+
+.cell, .topic, .reply, .post { border-width: 0 0 2px !important; box-shadow: none; }
+.cell:last-child, .topic:last-child, .reply:last-child, .post:last-child { border-bottom: 0 !important; }
+
+.box .header, .box .cell:first-child, .v-card__title, .panel-heading, .widget-title {
+  color: #fff8e4 !important;
+  background: linear-gradient(#96948a, #68675f) !important;
+  border-bottom: 2px solid var(--mc-stone-dark) !important;
+  text-shadow: 2px 2px 0 #3d3d38;
+}
+
+/* Links and metadata. */
+a { color: #17628f; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: #a44526; }
+.topic_title, .topic-title, .title, h1, h2, h3, h4 { color: #49301f; font-weight: 800; }
+.topic_title:hover, .topic-title:hover { color: var(--mc-grass-dark); }
+.small, .gray, .fade, .meta, .topic-info, .created, time { color: var(--mc-ink-soft) !important; }
+
+/* Buttons are raised stone buttons. */
+button, .button, .btn, input[type="button"], input[type="submit"], input[type="reset"], .v-btn {
+  min-height: 32px;
+  color: #fffbea !important;
+  background: linear-gradient(135deg, #aaa89c 0 48%, #96948a 48% 100%) !important;
+  border: 2px solid #3e3e39 !important;
+  border-color: #d6d4c6 #44433f #44433f #d6d4c6 !important;
+  border-radius: 0 !important;
+  box-shadow: 3px 3px 0 #37332d !important;
+  font-weight: 800;
+  text-shadow: 2px 2px 0 #45443e;
+  transition: transform .1s ease, box-shadow .1s ease, filter .1s ease;
+}
+
+button:hover, .button:hover, .btn:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover, .v-btn:hover {
+  filter: brightness(1.13);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 #37332d !important;
+}
+button:active, .button:active, .btn:active, input[type="button"]:active, input[type="submit"]:active, input[type="reset"]:active, .v-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #37332d !important;
+}
+.button.green, .btn-success, .v-btn.success { background: linear-gradient(135deg, #85c94b, #4c8d2c) !important; }
+.button.red, .btn-danger, .v-btn.error { background: linear-gradient(135deg, #cf6955, #91382e) !important; }
+
+/* Form controls and editors. */
+input:not([type="button"]):not([type="submit"]):not([type="reset"]), select, textarea, .v-text-field input, .v-input input {
+  color: var(--mc-ink) !important;
+  background: var(--mc-paper-light) !important;
+  border: 2px solid var(--mc-stone-dark) !important;
+  border-color: #55544e #cbc8b8 #cbc8b8 #55544e !important;
+  border-radius: 0 !important;
+  box-shadow: inset 2px 2px 0 rgba(83, 79, 67, .18) !important;
+}
+input:focus, select:focus, textarea:focus, .v-text-field input:focus, .v-input input:focus {
+  outline: 3px solid rgba(97, 169, 55, .65);
+  outline-offset: 1px;
+  border-color: var(--mc-grass-dark) !important;
+}
+::placeholder { color: #837b68; opacity: 1; }
+
+/* Reading content. */
+pre, code, .CodeMirror, .markdown-body pre, .topic-content pre {
+  font-family: "Cascadia Mono", "JetBrains Mono", Consolas, monospace !important;
+  text-shadow: none;
+}
+pre, .CodeMirror, .markdown-body pre, .topic-content pre {
+  color: #ecf4df !important;
+  background: #353a38 !important;
+  border: 3px solid #292c2b !important;
+  border-color: #8b8f8a #1f2221 #1f2221 #8b8f8a !important;
+  border-radius: 0 !important;
+  box-shadow: inset 3px 3px 0 rgba(0, 0, 0, .35);
+}
+code:not(pre code) {
+  color: #77382c;
+  background: #ead9b8;
+  border: 1px solid #b6966d;
+  border-radius: 0;
+  padding: .08em .3em;
+}
+blockquote, .reply-content blockquote, .topic-content blockquote {
+  color: #4e463a;
+  background: #e4d3ae !important;
+  border: 0 !important;
+  border-left: 7px solid var(--mc-dirt) !important;
+  box-shadow: inset 3px 0 0 var(--mc-dirt-light), 2px 2px 0 rgba(74, 52, 35, .35);
+  margin: 1em 0;
+  padding: .75em 1em;
+}
+
+/* Avatars retain their art but get a block frame. */
+.avatar, img.avatar, .member-avatar img { border-radius: 0 !important; border: 2px solid var(--mc-dirt-dark); box-shadow: 2px 2px 0 var(--mc-dirt); }
+
+/* Pagination and tabs. */
+.pagination, .pager, .pagebar, .v-pagination { gap: 6px; }
+.pagination a, .pagination span, .pager a, .pager span, .pagebar a, .pagebar span, .v-pagination__item {
+  color: #fffbe8 !important;
+  background: var(--mc-stone) !important;
+  border: 2px solid #41413c !important;
+  border-radius: 0 !important;
+  box-shadow: 2px 2px 0 #3e3932;
+  text-shadow: 1px 1px 0 #43423c;
+}
+.pagination .active, .pagination .current, .pager .active, .pagebar .active, .v-pagination__item--is-active {
+  background: var(--mc-grass) !important;
+  border-color: var(--mc-grass-dark) !important;
+}
+.pagination a:hover, .pager a:hover, .pagebar a:hover { background: var(--mc-dirt-light) !important; }
+
+hr, .sep, .separator { border: 0; border-top: 2px solid #b49c79; border-bottom: 1px solid #fff6dd; }
+table { border-collapse: collapse; background: var(--mc-paper); }
+th { color: #fff9e5; background: var(--mc-stone-dark); text-shadow: 1px 1px #373733; }
+th, td { border: 2px solid #a28d70; }
+
+/* Floating menus and alerts should not become translucent over the scene. */
+.dropdown-menu, .menu, .popover, .modal-content, .dialog, .alert, .toast {
+  color: var(--mc-ink) !important;
+  background: var(--mc-paper) !important;
+  border: var(--mc-pixel-border) !important;
+  border-radius: 0 !important;
+  box-shadow: var(--mc-shadow) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root { --mc-ink: #eee5ca; --mc-ink-soft: #c6bca2; --mc-paper: #3d3b35; --mc-paper-light: #4c4940; --mc-shadow: 4px 4px 0 rgba(0,0,0,.86); }
+  html { background-color: #172d4f; background-image: url("assets/night-pc.png"); }
+  body { text-shadow: 0 1px 0 rgba(0,0,0,.5); }
+  #Main, .container > .content, .page-content { background: rgba(61, 59, 53, .95); }
+  .box, .v-card, .card, .sidebar .box, #Rightbar .box, .cell, .topic, .reply, .post, .panel, .widget { background: var(--mc-paper) !important; }
+  .topic_title, .topic-title, .title, h1, h2, h3, h4 { color: #ffe5b0; }
+  a { color: #7fc8f0; } a:hover { color: #ffd06a; }
+  input:not([type="button"]):not([type="submit"]):not([type="reset"]), select, textarea, .v-text-field input, .v-input input { color: var(--mc-ink) !important; background: var(--mc-paper-light) !important; }
+  blockquote, .reply-content blockquote, .topic-content blockquote { color: #f1e5c7; background: #504534 !important; }
+  code:not(pre code) { color: #ffd2a2; background: #594536; border-color: #8e684c; }
+}
+
+/* Portrait backgrounds and compact, readable layout. */
+@media (max-width: 768px) {
+  html { background-image: url("assets/day-mobile.png"); background-position: center top; background-size: cover; background-attachment: scroll; }
+  #Main, .container > .content, .page-content { margin: 10px !important; }
+  #Rightbar, .sidebar { margin-top: 14px; }
+  .box, .v-card, .card, .sidebar .box, #Rightbar .box { box-shadow: 3px 3px 0 rgba(46, 33, 25, .82); }
+  .cell, .topic, .reply, .post { padding: 11px 10px !important; }
+  body { font-size: 15px; line-height: 1.7; }
+  h1 { font-size: 1.45rem; } h2 { font-size: 1.25rem; } h3 { font-size: 1.1rem; }
+  pre, .CodeMirror, .markdown-body pre, .topic-content pre { max-width: 100%; overflow-x: auto; font-size: 12px; }
+  button, .button, .btn, input[type="button"], input[type="submit"], .v-btn { min-height: 36px; }
+}
+
+@media (max-width: 768px) and (prefers-color-scheme: dark) {
+  html { background-image: url("assets/night-mobile.png"); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+}
