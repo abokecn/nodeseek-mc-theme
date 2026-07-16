@@ -1,0 +1,111 @@
+/* NodeSeek Minecraft theme — post-list-item details */
+:root {
+  --mc-grass: #4f9f38;
+  --mc-grass-dark: #39782c;
+  --mc-dirt: #76502c;
+  --mc-dirt-dark: #422d1b;
+  --mc-stone: #6f756f;
+  --mc-stone-light: #aeb5ae;
+  --mc-water: #42b9d6;
+  --mc-gold: #e2ba4b;
+  --mc-sand: #f1dfae;
+}
+
+/* Keep the topic-list card treatment local to the actual list item. */
+.post-list-item {
+  position: relative;
+  margin-bottom: 12px;
+  border: 2px solid var(--mc-dirt-dark);
+  border-radius: 0;
+  box-shadow: 4px 4px 0 var(--mc-dirt-dark);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease,
+    filter 160ms ease;
+}
+
+.post-list-item:hover {
+  border-color: var(--mc-water);
+  box-shadow: 4px 4px 0 var(--mc-dirt-dark), 0 0 0 2px color-mix(in srgb, var(--mc-water) 45%, transparent);
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+.post-title a {
+  color: var(--mc-dirt-dark);
+  font-weight: 800;
+}
+
+.post-info,
+.post-info span,
+.post-info time {
+  color: var(--mc-stone);
+}
+
+.post-info .info-author a,
+.post-info .info-last-commenter a {
+  color: var(--mc-water);
+  font-weight: 700;
+}
+
+.post-category {
+  display: inline-block;
+  padding: 2px 8px;
+  background: linear-gradient(180deg, var(--mc-grass) 0 34%, var(--mc-dirt) 34% 100%);
+  border: 2px solid var(--mc-dirt-dark);
+  border-radius: 0;
+  box-shadow: 0 3px 0 var(--mc-dirt-dark);
+  color: #fff8e8;
+  line-height: 1.25;
+}
+
+/* Small, non-interactive pixel corners add texture without covering card content. */
+.post-list-item::before,
+.post-list-item::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  pointer-events: none;
+}
+
+.post-list-item::before {
+  top: -2px;
+  left: -2px;
+  background: var(--mc-grass);
+  box-shadow: 6px 0 0 var(--mc-stone), 0 6px 0 var(--mc-stone);
+}
+
+.post-list-item::after {
+  right: -2px;
+  bottom: -2px;
+  background: var(--mc-gold);
+  box-shadow: -6px 0 0 var(--mc-stone), 0 -6px 0 var(--mc-stone);
+}
+
+@media (prefers-color-scheme: dark) {
+  .post-list-item {
+    border-color: var(--mc-stone);
+    box-shadow: 4px 4px 0 #111611;
+  }
+
+  .post-list-item:hover {
+    border-color: var(--mc-grass);
+    box-shadow: 4px 4px 0 #111611, 0 0 0 2px color-mix(in srgb, var(--mc-water) 45%, transparent);
+  }
+
+  .post-title a {
+    color: var(--mc-sand);
+  }
+
+  .post-info,
+  .post-info span,
+  .post-info time {
+    color: var(--mc-stone-light);
+  }
+
+  .post-category {
+    background: linear-gradient(180deg, var(--mc-grass-dark) 0 34%, var(--mc-dirt-dark) 34% 100%);
+    border-color: var(--mc-stone);
+    box-shadow: 0 3px 0 #111611;
+    color: var(--mc-sand);
+  }
+}
