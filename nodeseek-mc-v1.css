@@ -1,0 +1,56 @@
+/* NodeSeek Minecraft Theme V1: shared page wallpaper policy. */
+
+/* Keep the canvas flush with the viewport and prevent wide content from scrolling it. */
+html,
+body {
+  margin: 0 !important;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+/* Desktop daytime wallpaper.  Apply it to every outer forum layer. */
+html,
+body,
+#nsk-frame {
+  background-color: transparent !important;
+  background-image: url("assets/day-pc.png") !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+}
+
+/* These layers must not paint an opaque fallback over the outer wallpaper. */
+body,
+#nsk-frame {
+  background-color: transparent !important;
+}
+
+/* Desktop nighttime wallpaper. */
+@media (prefers-color-scheme: dark) {
+  body,
+  #nsk-frame {
+    background-image: url("assets/night-pc.png") !important;
+    background-position: center center !important;
+  }
+}
+
+/* Mobile wallpaper uses scrolling attachment to avoid fixed-background jank. */
+@media (max-width: 768px) {
+  html,
+  body,
+  #nsk-frame {
+    background-image: url("assets/day-mobile.png") !important;
+    background-position: center top !important;
+    background-attachment: scroll !important;
+  }
+}
+
+/* Explicitly replace the mobile daytime image when the system is dark. */
+@media (max-width: 768px) and (prefers-color-scheme: dark) {
+  html,
+  body,
+  #nsk-frame {
+    background-image: url("assets/night-mobile.png") !important;
+  }
+}
