@@ -28,15 +28,18 @@
 
 * { box-sizing: border-box; }
 
-html {
+html, body, #nsk-frame {
   min-height: 100%;
   background: #87c9e8 url("assets/day-pc.png") center top / cover fixed no-repeat;
+}
+
+body, #nsk-frame {
+  background: transparent !important;
 }
 
 body {
   min-height: 100vh;
   color: var(--mc-ink);
-  background: transparent !important;
   font-family: "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
   line-height: 1.65;
   text-shadow: 0 1px 0 rgba(255, 255, 255, .25);
@@ -213,7 +216,7 @@ th, td { border: 2px solid #a28d70; }
 
 @media (prefers-color-scheme: dark) {
   :root { --mc-ink: #eee5ca; --mc-ink-soft: #c6bca2; --mc-paper: #3d3b35; --mc-paper-light: #4c4940; --mc-shadow: 4px 4px 0 rgba(0,0,0,.86); }
-  html { background-color: #172d4f; background-image: url("assets/night-pc.png"); }
+  html, body, #nsk-frame { background: #172d4f url("assets/night-pc.png") center top / cover fixed no-repeat !important; }
   body { text-shadow: 0 1px 0 rgba(0,0,0,.5); }
   #Main, #nsk-body, .head-container, .selector, .board, .container > .content, .page-content { background: rgba(61, 59, 53, .95); }
   .box, .v-card, .card, .sidebar .box, #Rightbar .box, #nsk-left-panel-container .nsk-panel,
@@ -228,7 +231,7 @@ th, td { border: 2px solid #a28d70; }
 
 /* Portrait backgrounds and compact, readable layout. */
 @media (max-width: 768px) {
-  html { background-image: url("assets/day-mobile.png"); background-position: center top; background-size: cover; background-attachment: scroll; }
+  html, body, #nsk-frame { background-image: url("assets/day-mobile.png") !important; background-position: center top; background-size: cover; background-attachment: scroll !important; }
   #Main, .container > .content, .page-content { margin: 10px !important; }
   #Rightbar, .sidebar { margin-top: 14px; }
   .box, .v-card, .card, .sidebar .box, #Rightbar .box { box-shadow: 3px 3px 0 rgba(46, 33, 25, .82); }
@@ -240,7 +243,7 @@ th, td { border: 2px solid #a28d70; }
 }
 
 @media (max-width: 768px) and (prefers-color-scheme: dark) {
-  html { background-image: url("assets/night-mobile.png"); }
+  html, body, #nsk-frame { background-image: url("assets/night-mobile.png") !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
