@@ -138,7 +138,14 @@ button:active, .button:active, .btn:active, input[type="button"]:active, input[t
 .button.red, .btn-danger, .v-btn.error { background: linear-gradient(135deg, #cf6955, #91382e) !important; }
 
 /* Form controls and editors. */
-input:not([type="button"]):not([type="submit"]):not([type="reset"]), select, textarea, .v-text-field input, .v-input input {
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+input[type="number"],
+select,
+textarea {
   color: var(--mc-ink) !important;
   background: var(--mc-paper-light) !important;
   border: 2px solid var(--mc-stone-dark) !important;
@@ -226,7 +233,7 @@ th, td { border: 2px solid #a28d70; }
   .post-list-item, .topic-carousel-wrapper, .topic, .reply, .post, .panel, .widget { background: var(--mc-paper) !important; }
   .topic_title, .topic-title, .title, h1, h2, h3, h4 { color: #ffe5b0; }
   a { color: #7fc8f0; } a:hover { color: #ffd06a; }
-  input:not([type="button"]):not([type="submit"]):not([type="reset"]), select, textarea, .v-text-field input, .v-input input { color: var(--mc-ink) !important; background: var(--mc-paper-light) !important; }
+  input[type="text"], input[type="search"], input[type="email"], input[type="password"], input[type="url"], input[type="number"], select, textarea { color: var(--mc-ink) !important; background: var(--mc-paper-light) !important; }
   blockquote, .reply-content blockquote, .topic-content blockquote { color: #f1e5c7; background: #504534 !important; }
   code:not(pre code) { color: #ffd2a2; background: #594536; border-color: #8e684c; }
 }
