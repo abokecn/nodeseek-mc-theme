@@ -48,16 +48,16 @@ body {
   border-radius: 0 !important;
 }
 
-#Wrapper { background: transparent !important; }
+#Wrapper, #nsk-frame { background: transparent !important; }
 
-#Main, .container > .content, .page-content {
+#Main, #nsk-body, .head-container, .selector, .board, .container > .content, .page-content {
   background: rgba(245, 238, 215, .94);
   border: var(--mc-pixel-border);
   box-shadow: var(--mc-shadow);
 }
 
 /* Header and navigation: grass block cap over a dirt face. */
-#Top, #Header, header, .navbar, .topbar, .header {
+#Top, #Header, #nsk-head, header, .navbar, .topbar, .header {
   color: #fff9de;
   background: linear-gradient(to bottom, var(--mc-grass-light) 0 5px, var(--mc-grass-dark) 5px 9px, var(--mc-dirt) 9px 100%) !important;
   border-top: 2px solid #b2e866;
@@ -66,20 +66,21 @@ body {
   text-shadow: 2px 2px 0 #35281d;
 }
 
-#Top a, #Header a, header a, .navbar a, .topbar a, .header a {
+#Top a, #Header a, #nsk-head a, header a, .navbar a, .topbar a, .header a {
   color: #fffce8 !important;
   font-weight: 700;
 }
 
-#Top a:hover, #Header a:hover, header a:hover, .navbar a:hover, .topbar a:hover, .header a:hover {
+#Top a:hover, #Header a:hover, #nsk-head a:hover, header a:hover, .navbar a:hover, .topbar a:hover, .header a:hover {
   color: #fff !important;
   background: rgba(255,255,255,.15);
   text-decoration: none;
 }
 
 /* Cards, topic rows and side modules. */
-.box, .v-card, .card, .sidebar .box, #Rightbar .box, .cell, .topic-list,
-.topic, .reply, .post, .panel, .widget {
+.box, .v-card, .card, .sidebar .box, #Rightbar .box, #nsk-left-panel-container .nsk-panel,
+#nsk-right-panel-container .nsk-panel, .cell, .topic-list, .post-list-controler,
+.post-list-item, .topic-carousel-wrapper, .topic, .reply, .post, .panel, .widget {
   color: var(--mc-ink);
   background: var(--mc-paper) !important;
   border: var(--mc-pixel-border) !important;
@@ -214,8 +215,10 @@ th, td { border: 2px solid #a28d70; }
   :root { --mc-ink: #eee5ca; --mc-ink-soft: #c6bca2; --mc-paper: #3d3b35; --mc-paper-light: #4c4940; --mc-shadow: 4px 4px 0 rgba(0,0,0,.86); }
   html { background-color: #172d4f; background-image: url("assets/night-pc.png"); }
   body { text-shadow: 0 1px 0 rgba(0,0,0,.5); }
-  #Main, .container > .content, .page-content { background: rgba(61, 59, 53, .95); }
-  .box, .v-card, .card, .sidebar .box, #Rightbar .box, .cell, .topic, .reply, .post, .panel, .widget { background: var(--mc-paper) !important; }
+  #Main, #nsk-body, .head-container, .selector, .board, .container > .content, .page-content { background: rgba(61, 59, 53, .95); }
+  .box, .v-card, .card, .sidebar .box, #Rightbar .box, #nsk-left-panel-container .nsk-panel,
+  #nsk-right-panel-container .nsk-panel, .cell, .topic-list, .post-list-controler,
+  .post-list-item, .topic-carousel-wrapper, .topic, .reply, .post, .panel, .widget { background: var(--mc-paper) !important; }
   .topic_title, .topic-title, .title, h1, h2, h3, h4 { color: #ffe5b0; }
   a { color: #7fc8f0; } a:hover { color: #ffd06a; }
   input:not([type="button"]):not([type="submit"]):not([type="reset"]), select, textarea, .v-text-field input, .v-input input { color: var(--mc-ink) !important; background: var(--mc-paper-light) !important; }
