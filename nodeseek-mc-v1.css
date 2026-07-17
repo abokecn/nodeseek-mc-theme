@@ -56,8 +56,8 @@ body {
   box-shadow: var(--mc-shadow);
 }
 
-/* Header and navigation: grass block cap over a dirt face. */
-#Top, #Header, header, .navbar, .topbar, .header {
+/* Current NodeSeek navigation: grass block cap over a dirt face. */
+#nsk-head {
   color: #fff9de;
   background: linear-gradient(to bottom, var(--mc-grass-light) 0 5px, var(--mc-grass-dark) 5px 9px, var(--mc-dirt) 9px 100%) !important;
   border-top: 2px solid #b2e866;
@@ -66,12 +66,12 @@ body {
   text-shadow: 2px 2px 0 #35281d;
 }
 
-#Top a, #Header a, header a, .navbar a, .topbar a, .header a {
+#nsk-head a {
   color: #fffce8 !important;
   font-weight: 700;
 }
 
-#Top a:hover, #Header a:hover, header a:hover, .navbar a:hover, .topbar a:hover, .header a:hover {
+#nsk-head a:hover {
   color: #fff !important;
   background: rgba(255,255,255,.15);
   text-decoration: none;
@@ -94,8 +94,10 @@ body {
 .box .header, .box .cell:first-child, .v-card__title, .panel-heading, .widget-title {
   color: #fff8e4 !important;
   background: linear-gradient(#96948a, #68675f) !important;
+  border: 0 !important;
   border-bottom: 2px solid var(--mc-stone-dark) !important;
-  text-shadow: 2px 2px 0 #3d3d38;
+  box-shadow: 0 2px 0 rgba(46, 33, 25, .5) !important;
+  text-shadow: 1px 1px 0 #3d3d38;
 }
 
 /* Links and metadata. */
